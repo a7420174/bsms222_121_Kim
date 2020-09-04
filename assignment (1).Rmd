@@ -43,6 +43,7 @@ print(a)
 <br/>
 
 We use the term *object* to describe stuff that is stored in R. Variables are examples, but objects can also be more complicated entities such as functions, which are described later.
+
 ### **2.2.2 The workspace**
 As we define objects in the console, we are actually changing the *workspace*. You can see all the variables saved in your workspace by typing:
 ```{r}
@@ -62,6 +63,7 @@ Now since these values are saved in variables, to obtain a solution to our equat
 (-b - sqrt(b^2 - 4*a*c) ) / ( 2*a )
 ```
 <br/>
+
 ### **2.2.3 Functions**
 Once you define variables, the data analysis process can usually be described as a series of functions applied to the data. R includes several predefined functions and most of the analysis pipelines we construct make extensive use of these.
 
