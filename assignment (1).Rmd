@@ -2,6 +2,9 @@
 title: "R notebook"
 output: html_notebook
 ---
+```{r setup, include=F}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, error = TRUE)
+```
 <br/>
 
 # **Chapter2 R basics**
@@ -246,6 +249,14 @@ log10(sqrt(100))
 
 <br/><br/>
 5. Which of the following will always return the numeric value stored in x? You can try out examples and use the help system if you want.)<br/>)<br/>
+```{r}
+x <- 100
+log(10^x)
+log10(x^10)
+log(exp(x))
+exp(log(x, base = 2))
+```
+<br/>
 a. log(10^x)<br/>
 b. log10(x^10)<br/>
 **c. log(exp(x))**<br/>
