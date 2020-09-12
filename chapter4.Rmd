@@ -775,6 +775,7 @@ a. `murders` is in tidy format and is stored in a tibble.
 b. **`murders` is in tidy format and is stored in a data frame.**
 c. `murders` is not in tidy format and is stored in a tibble.
 d. `murders` is not in tidy format and is stored in a data frame.
+
 <br>
 2. Use `as_tibble` to convert the `murders` data table into a tibble and save it in an object called `murders_tibble`.
 ```{r}
