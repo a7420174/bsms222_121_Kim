@@ -1,6 +1,8 @@
 ---
-title: "**Chapter 5 Importing data**"
-output: html_notebook
+title: '**Chapter 5 Importing data**'
+output:
+  pdf_document: default
+  html_notebook: default
 ---
 ```{r setup, include=F}
 knitr::opts_chunk$set(error = TRUE, echo = TRUE)
@@ -23,7 +25,7 @@ The first step when importing data from a spreadsheet is to locate the file cont
 The main challenge in this first step is that we need to let the R functions doing the importing know where to look for the file containing the data. The simplest way to do this is to have a copy of the file in the folder in which the importing functions look by default. Once we do this, all we have to supply to the importing function is the filename.
 
 A spreadsheet containing the US murders data is included as part of the **dslabs** package. Finding this file is not straightforward, but the following lines of code copy the file to the folder in which R looks in by default. We explain how these lines work below.
-```{r}
+```{r eval=FALSE}
 filename <- "murders.csv"
 dir <- system.file("extdata", package = "dslabs") 
 fullpath <- file.path(dir, filename)
@@ -33,6 +35,8 @@ file.copy(fullpath, "murders.csv")
 This code does not read the data into R, it just copies a file. But once the file is copied, we can import the data with a simple line of code. Here we use the `read_csv` function from the **readr** package, which is part of the tidyverse.
 ```{r}
 library(tidyverse)
+```
+```{r eval=FALSE}
 dat <- read_csv(filename)
 ```
 <br/>
@@ -114,7 +118,7 @@ list.files()
 ## **5.2 The readr and readxl packages**
 
 In this section we introduce the main tidyverse data importing functions. We will use the `murders.csv` file provided by the **dslabs** package as an example. To simplify the illustration we will copy the file to our working directory using the following code:
-```{r}
+```{r eval=F}
 filename <- "murders.csv"
 dir <- system.file("extdata", package = "dslabs") 
 fullpath <- file.path(dir, filename)
@@ -170,7 +174,7 @@ path <- system.file("extdata", package = "dslabs")
 files <- list.files(path, "csv$")
 files
 ```
-```{r message=FALSE}
+```{r warning=FALSE}
 fullpath <- file.path(path, files)
 sapply(fullpath, read_csv)
 ```
@@ -191,9 +195,10 @@ to see that the names are not informative.
 Use the readLines function to read in just the first line (we later learn how to extract values from the output).
 ```{r}
 colns <- read_lines(fullpath[5], n_max = 1)
-colns <- strsplit(colns, ",") %>% unlist %>% .[2:length(.)]
-colns <- c("RowNumber","Region_char", colns)
-dat <- read_csv(fullpath[5], col_names = colns, skip = 1)
+colns <- colns %>%  strsplit(",") %>% unlist %>% .[2:length(.)]
+dat <- read_csv(fullpath[5], col_names = F, skip = 1) %>% select(-X1)
+colnames(dat) <- c("Region_char", colns)
+head(dat)
 ```
 <br/>
 
